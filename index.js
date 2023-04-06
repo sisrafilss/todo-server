@@ -32,8 +32,10 @@ async function run() {
     });
 
     // GET All Tasks
-    app.get("/all-tasks", async (req, res) => {
-      const cursor = taskList.find({});
+    app.get("/all-tasks/:email", async (req, res) => {
+      const email = req.params.email;
+
+      const cursor = taskList.find({ email: email });
       const tasks = await cursor.toArray();
       res.json(tasks);
     });
