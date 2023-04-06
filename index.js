@@ -46,6 +46,23 @@ async function run() {
       res.json(result);
       // console.log("ID =", id);
     });
+
+    // PUT - Update a task
+    app.put("/edit-task", async (req, res) => {
+      const updatedTask = req.body;
+
+      const result = await taskList.updateOne(
+        { _id: new ObjectId(updatedTask._id) },
+        {
+          $set: {
+            title: updatedTask.title,
+            description: updatedTask.description,
+            dueDate: updatedTask.dueDate,
+          },
+        }
+      );
+      res.json(result);
+    });
   } finally {
     // await client.close();
   }
