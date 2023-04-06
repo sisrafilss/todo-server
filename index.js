@@ -37,6 +37,15 @@ async function run() {
       const tasks = await cursor.toArray();
       res.json(tasks);
     });
+
+    // Delete - Delete a task
+    app.delete("/task-list/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await taskList.deleteOne(query);
+      res.json(result);
+      // console.log("ID =", id);
+    });
   } finally {
     // await client.close();
   }
