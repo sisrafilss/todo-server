@@ -31,7 +31,12 @@ async function run() {
       res.json(result);
     });
 
-
+    // GET All Tasks
+    app.get("/all-tasks", async (req, res) => {
+      const cursor = taskList.find({});
+      const tasks = await cursor.toArray();
+      res.json(tasks);
+    });
   } finally {
     // await client.close();
   }
